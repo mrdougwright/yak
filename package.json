@@ -1,0 +1,19 @@
+{
+  "name": "chat-with-ollama",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified, who needs them?\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Doug Wright & ChatGPT",
+  "license": "ISC",
+  "type": "module",
+  "description": "Chatting with Ollama",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "node-fetch": "^3.3.2"
+  }
+}
