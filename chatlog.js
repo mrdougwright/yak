@@ -1,25 +1,25 @@
-import fs from 'fs'
+import fs from "fs";
 
-const FILE = 'chatlog.jsonl'
+const FILE = "chatlog.jsonl";
 
-export function readChatHistory(limit = 40) {
-  if (!fs.existsSync(FILE)) return []
-  const lines = fs.readFileSync(FILE, 'utf-8').split('\n').filter(Boolean)
-  const trimmed = lines.slice(-limit)
-  return trimmed.map(line => JSON.parse(line))
+export function readChatHistory() {
+  if (!fs.existsSync(FILE)) return [];
+  const lines = fs.readFileSync(FILE, "utf-8").split("\n").filter(Boolean);
+  return lines.map((line) => JSON.parse(line));
 }
 
 export function appendToLog(message) {
-  fs.appendFileSync(FILE, JSON.stringify(message) + '\n')
+  fs.appendFileSync(FILE, JSON.stringify(message) + "\n");
 }
 
+// deprecated; may bring back log truncation...
 export function truncateLog(maxLines = 40) {
-  const lines = fs.readFileSync(FILE, 'utf-8').split('\n').filter(Boolean)
-  if (lines.length <= maxLines) return
-  const trimmed = lines.slice(-maxLines)
-  fs.writeFileSync(FILE, trimmed.join('\n') + '\n')
+  const lines = fs.readFileSync(FILE, "utf-8").split("\n").filter(Boolean);
+  if (lines.length <= maxLines) return;
+  const trimmed = lines.slice(-maxLines);
+  fs.writeFileSync(FILE, trimmed.join("\n") + "\n");
 }
 
 export function resetLog() {
-  fs.writeFileSync(FILE, '')
+  fs.writeFileSync(FILE, "");
 }
