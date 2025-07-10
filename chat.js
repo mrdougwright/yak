@@ -35,7 +35,8 @@ async function main() {
       const decoder = new TextDecoder();
       let buffer = "";
 
-      console.log("🤖:", "");
+      process.stdout.write("🤖: ");
+
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
