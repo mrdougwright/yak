@@ -14,6 +14,16 @@ function isOllamaRunning(callback) {
   req.on("error", () => callback(false));
 }
 
+function startOllama() {
+  console.log("🔄 Starting Ollama...");
+  const ollama = spawn("ollama", ["serve"], {
+    detached: true,
+    stdio: "ignore", // No output in terminal
+  });
+
+  return ollama;
+}
+
 function startProcess(name, script) {
   const child = spawn("node", [path.join(__dirname, "..", script)], {
     stdio: "inherit",
@@ -31,26 +41,18 @@ function startProcess(name, script) {
 function startBackgroundProcess(name, script) {
   const child = spawn("node", [path.join(__dirname, "..", script)], {
     detached: true,
-    stdio: "ignore", // No output in terminal
+    stdio: "inherit",
   });
 
   child.unref(); // Allow parent to exit independently
 }
 
-function startOllama() {
-  console.log("🔄 Starting Ollama...");
-  const ollama = spawn("ollama", ["serve"], {
-    detached: true,
-    stdio: "ignore",
-  });
-
-  return ollama;
-}
-
 function startYak() {
   console.log("🚀 Starting Yak server and chat UI...\n");
   startBackgroundProcess("Yak Server", "server.js");
-  startProcess("Yak Chat", "chat.js");
+  setTimeout(() => {
+    startProcess("Yak Chat", "chat.js");
+  }, 1000);
 }
 
 isOllamaRunning((running) => {

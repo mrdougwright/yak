@@ -1,6 +1,12 @@
 import fs from "fs";
 
+const CONFIG = "config.json";
 const FILE = "chatlog.jsonl";
+
+export function getConfig() {
+  const config = fs.readFileSync(CONFIG, "utf-8");
+  return JSON.parse(config);
+}
 
 export function readChatHistory() {
   if (!fs.existsSync(FILE)) return [];
