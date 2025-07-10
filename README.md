@@ -34,20 +34,20 @@ Start chatting
 🤖: How about "Yak"? It's short, and yaks are fluffy like llamas!
 ```
 
-## LLM Models
+### Models
 
 Ensure Ollama server is running.
 ```bash
 ollama list
 ```
-You should see something like,
+Depending on what models you downloaded, you should see something like:
 ```bash
 NAME               ID              SIZE      MODIFIED
 llama3:instruct    365c0bd3c000    4.7 GB    25 hours ago
 gemma3:1b          8648f39daa8f    815 MB    59 minutes ago
 ```
 
-You can change models in the `config.json` file.
+You can change the model in the `config.json` file.
 
 ```json
 {
@@ -55,11 +55,11 @@ You can change models in the `config.json` file.
 }
 ```
 
-### Log Management
+### History
 
 Don't like the chat? All messages are logged to chatlog.jsonl
 
-To reset the log:
+You can remove lines from file, or reset the entire log:
 ```bash
 node chat.js --reset
 ```
