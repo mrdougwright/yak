@@ -11,6 +11,9 @@
   "license": "ISC",
   "type": "module",
   "description": "Chatting with Ollama",
+  "bin": {
+    "yak": "./yak.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
