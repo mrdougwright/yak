@@ -24,7 +24,6 @@ A minimalist local LLM terminal chat interface using [Ollama](https://ollama.com
 
 ### Start
 
-
 ```bash
 yak start
 ```
@@ -35,7 +34,7 @@ Start chatting
 🤖: How about "Yak"? It's short, and yaks are fluffy like llamas!
 ```
 
-## Troubleshooting
+## LLM Models
 
 Ensure Ollama server is running.
 ```bash
@@ -45,6 +44,15 @@ You should see something like,
 ```bash
 NAME               ID              SIZE      MODIFIED
 llama3:instruct    365c0bd3c000    4.7 GB    25 hours ago
+gemma3:1b          8648f39daa8f    815 MB    59 minutes ago
+```
+
+You can change models in the `config.json` file.
+
+```json
+{
+  "model": "gemma3:1b"
+}
 ```
 
 ### Log Management

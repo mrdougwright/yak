@@ -1,6 +1,9 @@
 import express from "express";
-import { readChatHistory, appendToLog } from "./chatlog.js";
+import { readChatHistory, appendToLog, getConfig } from "./chatlog.js";
 import { streamChat } from "./ollama.js";
+
+const model = getConfig().model;
+console.log(`🤖 Using model: ${model}\n`);
 
 const app = express();
 app.use(express.json());
@@ -18,7 +21,7 @@ app.post("/ask", async (req, res) => {
   let fullReply = "";
 
   try {
-    await streamChat("llama3:instruct", history, (token) => {
+    await streamChat(model, history, (token) => {
       fullReply += token;
       res.write(JSON.stringify({ response: token }) + "\n");
     });
@@ -38,4 +41,4 @@ app.post("/ask", async (req, res) => {
   res.end();
 });
 
-app.listen(3000, () => console.log("Server running at http://localhost:3000"));
+app.listen(3000, () => console.log("Warming up..."));
