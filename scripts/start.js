@@ -1,68 +1,56 @@
-import http from "http";
-import { spawn } from "node:child_process";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-function isOllamaRunning(callback) {
-  const req = http.get("http://localhost:11434", (res) => {
-    callback(res.statusCode === 200);
-  });
-
-  req.on("error", () => callback(false));
-}
+// scripts/start.js - Auto-start Ollama and launch chat
+import { spawn } from 'node:child_process';
+import { checkConnection } from '../lib/ollama.js';
+import { chat } from '../lib/chat.js';
 
 function startOllama() {
-  console.log("🔄 Starting Ollama...");
-  const ollama = spawn("ollama", ["serve"], {
+  console.log('🔄 Starting Ollama...');
+  const ollama = spawn('ollama', ['serve'], {
     detached: true,
-    stdio: "ignore", // No output in terminal
+    stdio: 'ignore',
   });
 
+  ollama.unref(); // Allow parent to exit independently
   return ollama;
 }
 
-function startProcess(name, script) {
-  const child = spawn("node", [path.join(__dirname, "..", script)], {
-    stdio: "inherit",
-  });
-
-  child.on("close", (code) => {
-    if (code !== 0) {
-      console.error(`❌ ${name} exited with code ${code}`);
+async function waitForOllama(maxAttempts = 10) {
+  for (let i = 0; i < maxAttempts; i++) {
+    if (await checkConnection()) {
+      return true;
     }
-  });
 
-  return child;
-}
-
-function startBackgroundProcess(name, script) {
-  const child = spawn("node", [path.join(__dirname, "..", script)], {
-    detached: true,
-    stdio: "inherit",
-  });
-
-  child.unref(); // Allow parent to exit independently
-}
-
-function startYak() {
-  console.log("🚀 Starting Yak server and chat UI...\n");
-  startBackgroundProcess("Yak Server", "server.js");
-  setTimeout(() => {
-    startProcess("Yak Chat", "chat.js");
-  }, 1000);
-}
-
-isOllamaRunning((running) => {
-  if (running) {
-    console.log("✅ Ollama is already running.\n");
-    startYak();
-  } else {
-    startOllama();
-    setTimeout(() => {
-      startYak();
-    }, 2000);
+    process.stdout.write('.');
+    await new Promise(resolve => setTimeout(resolve, 1000));
   }
-});
+
+  return false;
+}
+
+async function main() {
+  console.log('🦧 Yak - Starting up...\n');
+
+  // Check if Ollama is already running
+  if (await checkConnection()) {
+    console.log('✅ Ollama is running\n');
+    await chat();
+    return;
+  }
+
+  // Start Ollama and wait for it
+  startOllama();
+  process.stdout.write('⏳ Waiting for Ollama to start');
+
+  const connected = await waitForOllama();
+
+  if (!connected) {
+    console.log('\n❌ Failed to start Ollama');
+    console.log('💡 Try running: ollama serve');
+    process.exit(1);
+  }
+
+  console.log('\n✅ Ollama is ready\n');
+  await chat();
+}
+
+main().catch(console.error);
