@@ -9,9 +9,8 @@ A minimalist local LLM terminal chat interface using [Ollama](https://ollama.com
 ## Features
 
 - 🧠 Runs on any Ollama-compatible model (`llama3:instruct`, `mistral`, `phi3`, etc)
-- 🧵 Real-time streaming replies in the terminal
-- 📜 Memory stored in a lightweight `chatlog.jsonl`
-- 🧪 Built with modern ESM syntax and native `fetch`
+- 🧵 Offline, Real-time streaming replies in the terminal
+- 📜 Memory stored in lightweight `<my-chatlog>.jsonl` files in `.yak` at root.
 
 ---
 
@@ -32,6 +31,17 @@ Start chatting
 ```
 🦧> What's a good name for a chat app?
 🤖: How about "Yak"? It's short, and yaks are fluffy like llamas!
+```
+
+### Usage
+
+```
+yak                  # Start chat (assumes Ollama running)
+yak start            # Auto-start Ollama and chat
+yak list             # List all chat sessions
+yak new <n>          # Create new chat session
+yak switch <n>       # Switch to chat session
+yak help             # Show help
 ```
 
 ### Models

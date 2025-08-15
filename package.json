@@ -1,12 +1,12 @@
 {
   "name": "chat-with-ollama",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified, who needs them?\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [],
+  "keywords": ["ollama", "llm", "chat", "local", "ai"],
   "author": "Doug Wright & ChatGPT",
   "license": "ISC",
   "type": "module",
