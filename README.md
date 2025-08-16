@@ -21,7 +21,7 @@ A minimalist local LLM terminal chat interface using [Ollama](https://ollama.com
 
 ---
 
-### Start
+## Start
 
 ```bash
 yak start
@@ -33,11 +33,18 @@ Start chatting
 🤖: How about "Yak"? It's short, and yaks are fluffy like llamas!
 ```
 
-### Usage
+If you have Ollama downloaded and running, Yak will automatically download a model if none is found.
+Yak will also create a new `default` chat session for your first session.
+
+Stop chatting with command or ctrl+c
+```
+🦧> /bye
+```
+
+## Usage
 
 ```
-yak                  # Start chat (assumes Ollama running)
-yak start            # Auto-start Ollama and chat
+yak start            # Start chat
 yak help             # Show help
 yak models           # List available models
 yak model <n>        # Change model
@@ -46,32 +53,34 @@ yak new <n>          # Create new chat session
 yak switch <n>       # Switch to chat session
 ```
 
-### Models
+## Models
 
-Ensure Ollama server is running.
+You can see your downloaded Ollama models by running:
+
 ```bash
-ollama list
-```
-Depending on what models you downloaded, you should see something like:
-```bash
-NAME               ID              SIZE      MODIFIED
-llama3:instruct    365c0bd3c000    4.7 GB    25 hours ago
-gemma3:1b          8648f39daa8f    815 MB    59 minutes ago
+yak models
 ```
 
-You can change the model in the `config.json` file.
+You can change the model with the CLI command
 
+```bash
+yak model <model-name>
+```
+or  in the `config.json` file manually.
 ```json
+// config.json
 {
-  "model": "gemma3:1b"
+  "model": "gemma3:1b",
 }
 ```
 
-### History
+If you want more models, download them from [Ollama](https://ollama.com/search)! 🦙
 
-Don't like the chat? All messages are logged to chatlog.jsonl
+## History
 
-You can remove lines from file, or reset the entire log:
+Don't like your chat? All messages are logged to `.yak/chats`.
+
+You can remove lines from file, or delete the entire log:
 ```bash
-node chat.js --reset
+yak delete <name-of-chat-file>
 ```

@@ -37,20 +37,16 @@ switch (command) {
     console.log('✨ Chat cleared');
     break;
 
-  case 'help':
-  case '--help':
-  case '-h':
-    showHelp();
-    break;
-
   case 'start':
     // Import and run the startup script
     const { default: startScript } = await import('./scripts/start.js');
     break;
 
+  case 'help':
+  case '--help':
+  case '-h':
   case undefined:
-    // Default behavior - just start chat (assumes Ollama running)
-    const { chat } = await import('./lib/chat.js');
-    await chat();
+    showHelp();
     break;
+
 }

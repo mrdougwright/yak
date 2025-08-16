@@ -1,6 +1,6 @@
 {
   "name": "chat-with-ollama",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified, who needs them?\" && exit 1",
