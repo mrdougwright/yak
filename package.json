@@ -1,6 +1,6 @@
 {
   "name": "yak-llm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Minimalist local LLM chat interface using Ollama",
   "main": "yak.js",
   "bin": {
@@ -9,7 +9,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["ollama", "llm", "chat", "local", "ai", "terminal", "cli"],
+  "keywords": [
+    "ollama",
+    "llm",
+    "chat",
+    "local",
+    "ai",
+    "terminal",
+    "cli"
+  ],
   "author": "Doug Wright",
   "license": "MIT",
   "type": "module",
