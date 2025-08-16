@@ -2,7 +2,7 @@
 
 A minimalist local LLM terminal chat interface using [Ollama](https://ollama.com), native streaming, and JSONL memory.
 
-> Yak at your local model. Fully offline. Edit or delete your chat history.
+> Yak at your local model. Fully offline. Edit or delete your chat history(s).
 
 ---
 
@@ -10,14 +10,14 @@ A minimalist local LLM terminal chat interface using [Ollama](https://ollama.com
 
 - 🧠 Runs on any Ollama-compatible model (`llama3:instruct`, `mistral`, `phi3`, etc)
 - 🧵 Offline, Real-time streaming replies in the terminal
-- 📜 Memory stored in lightweight `<my-chatlog>.jsonl` files in `.yak` at root.
+- 📜 Memory stored in lightweight `my-chat-log.jsonl` files on your machine
 
 ---
 
 ## Requirements
 
 - Node.js 18+
-- Ollama installed and running
+- [Ollama](https://ollama.com) installed and running
 
 ---
 
@@ -38,10 +38,12 @@ Start chatting
 ```
 yak                  # Start chat (assumes Ollama running)
 yak start            # Auto-start Ollama and chat
+yak help             # Show help
+yak models           # List available models
+yak model <n>        # Change model
 yak list             # List all chat sessions
 yak new <n>          # Create new chat session
 yak switch <n>       # Switch to chat session
-yak help             # Show help
 ```
 
 ### Models

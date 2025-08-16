@@ -1,30 +1,8 @@
 #!/usr/bin/env node
 // yak.js - Main entry point
 
-import { listChats, createChat, switchChat, deleteChat, resetCurrentChat } from './lib/storage.js';
-
-function showHelp() {
-  console.log('🦧 Yak - Local LLM Chat Interface');
-  console.log('');
-  console.log('Usage:');
-  console.log('  yak                  - Start chat (assumes Ollama running)');
-  console.log('  yak start            - Auto-start Ollama and chat');
-  console.log('');
-  console.log('Chat Management:');
-  console.log('  yak list             - List all chat sessions');
-  console.log('  yak new <n>       - Create new chat session');
-  console.log('  yak switch <n>    - Switch to chat session');
-  console.log('  yak delete <n>    - Delete chat session');
-  console.log('  yak --reset          - Clear current chat history');
-  console.log('');
-  console.log('Other:');
-  console.log('  yak help             - Show this help');
-  console.log('');
-  console.log('Examples:');
-  console.log('  yak new python-help  - Create chat for Python questions');
-  console.log('  yak switch work      - Switch to work-related chat');
-  console.log('  yak list             - See all your chats');
-}
+import { listChats, createChat, switchChat, deleteChat, resetCurrentChat, listAvailableModels, switchModel } from './lib/storage.js';
+import { showHelp } from './lib/help.js';
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -32,6 +10,14 @@ const command = args[0];
 switch (command) {
   case 'list':
     await listChats();
+    break;
+
+  case 'models':
+    await listAvailableModels();
+    break;
+
+  case 'model':
+    await switchModel(args[1]);
     break;
 
   case 'new':
