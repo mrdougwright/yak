@@ -21,6 +21,11 @@ A minimalist local LLM terminal chat interface using [Ollama](https://ollama.com
 
 ---
 
+## Installation
+```bash
+npm install -g yak-llm
+```
+
 ## Start
 
 ```bash
@@ -68,7 +73,7 @@ yak model <model-name>
 ```
 or  in the `config.json` file manually.
 ```json
-// config.json
+// .yak/config.json
 {
   "model": "gemma3:1b",
 }
