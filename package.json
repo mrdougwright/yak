@@ -21,7 +21,9 @@
   "author": "Doug Wright",
   "license": "MIT",
   "type": "module",
-  "dependencies": {},
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  },
   "engines": {
     "node": ">=18.0.0"
   }
