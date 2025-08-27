@@ -1,16 +1,17 @@
-# Yak 🦙
+![Yak Logo](./assets/yak.png)
+
 
 A minimalist local LLM terminal chat interface using [Ollama](https://ollama.com), native streaming, and JSONL memory.
 
-> Yak at your local model. Fully offline. Edit or delete your chat history(s).
+Yak at your local model. Fully offline. Edit or delete your chat history(s).
 
 ---
 
 ## Features
 
-- 🧠 Runs on any Ollama-compatible model (`llama3:instruct`, `mistral`, `phi3`, etc)
+- 🧠 Runs on any Ollama-compatible model (`gemma3`, `llama3`, `mistral`, etc)
 - 🧵 Offline, Real-time streaming replies in the terminal
-- 📜 Memory stored in lightweight `my-chat-log.jsonl` files on your machine
+- 📜 Memory stored in lightweight `jsonl` files on your machine
 
 ---
 
@@ -49,13 +50,32 @@ Stop chatting with command or ctrl+c
 ## Usage
 
 ```
-yak start            # Start chat
-yak help             # Show help
-yak models           # List available models
-yak model <n>        # Change model
-yak list             # List all chat sessions
-yak new <n>          # Create new chat session
-yak switch <n>       # Switch to chat session
+🚀 Main Commands
+──────────────────────────────────────────────────
+  yak start            Start chat session with your model
+  yak help             Show this help message
+  yak list             List all chat sessions
+  yak models           List available models
+
+
+💬 Chat Management
+──────────────────────────────────────────────────
+  yak new <name>       Create new chat session
+  yak switch <name>    Switch to chat session
+  yak delete <name>    Delete chat session
+  yak --reset          Clear current chat history
+
+
+🤖 Model Management
+──────────────────────────────────────────────────
+  yak model <name>     Switch to different model
+  yak models           List downloaded models
+
+
+💬 In-Chat Commands
+──────────────────────────────────────────────────
+  /bye or /quit        Exit chat session
+  http or www          Chat will detect given URLs and crawl them
 ```
 
 ## Models
@@ -73,7 +93,6 @@ yak model <model-name>
 ```
 or  in the `config.json` file manually.
 ```json
-// .yak/config.json
 {
   "model": "gemma3:1b",
 }
