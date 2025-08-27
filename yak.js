@@ -61,7 +61,7 @@ switch (command) {
     console.log();
     console.log(createLogo());
     console.log();
-    console.log(gradient(colors.primary)("YAK v1.1.0"));
+    console.log(gradient(colors.primary)("YAK v1.1.1"));
     console.log(chalk.dim("Local LLM Development Assistant"));
     console.log();
     break;

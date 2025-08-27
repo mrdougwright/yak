@@ -1,6 +1,6 @@
 {
   "name": "yak-llm",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Minimalist local LLM chat interface using Ollama",
   "main": "yak.js",
   "bin": {
